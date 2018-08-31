@@ -3,13 +3,12 @@ apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
-
-gretty {
-	 servletContainer = "tomcat8"
-}
-
 dependencies {
 
     providedCompile 'javax.servlet:javax.servlet-api:4.0.0'
 	compile 'javax.servlet:jstl:1.2'
+	compile 'org.springframework:spring-webmvc:5.0.8.RELEASE'
+	
+	testCompile 'junit:utni:4.12'
+	testCompile 'org.springframework:spring-test:5.0.8.RELEASE'
 }
