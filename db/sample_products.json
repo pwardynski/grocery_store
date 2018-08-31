@@ -1,0 +1,10 @@
+{"_id":{"$oid":"6b86da08202dd1dcdf160c4f"},"code":1,"name":"onion","category":"vegetable","description":"polish national vegetable"}
+{"_id":{"$oid":"5b86da47202dd1dcdf160c50"},"code":2,"name":"potato","category":"vegetable","description":"perfect to make chips"}
+{"_id":{"$oid":"5b86da5d202dd1dcdf160c51"},"code":3,"name":"tomato","category":"vegetable","description":"perfect to make ketchup"}
+{"_id":{"$oid":"5b86da77202dd1dcdf160c52"},"code":4,"name":"carrot","category":"vegetable","description":"perfect to make juice"}
+{"_id":{"$oid":"5b86da9e202dd1dcdf160c53"},"code":5,"name":"apple","category":"fruit","description":"associated with iPhone"}
+{"_id":{"$oid":"5b86dac3202dd1dcdf160c54"},"code":6,"name":"peach","category":"fruit","description":"do not try to eat her seed"}
+{"_id":{"$oid":"5b86dae7202dd1dcdf160c55"},"code":7,"name":"cherry","category":"fruit","description":"perfest as cake decoration"}
+{"_id":{"$oid":"5b86db0c202dd1dcdf160c56"},"code":8,"name":"eggplant","category":"vegetable","description":"a funny vegetable"}
+{"_id":{"$oid":"5b86db65202dd1dcdf160c57"},"code":9,"name":"cucumber","category":"vegetable","description":"a pickle main ingredient"}
+{"_id":{"$oid":"5b86db9c202dd1dcdf160c58"},"code":10,"name":"beetroot","category":"vegetable","description":"very healthy and very very red"}
