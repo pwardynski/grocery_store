@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+ 
+	<context:component-scan base-package="pl.edu.agh.fiis.grocery.core"/>
+
+	<mongo:mongo-client id="mongoClient" host="localhost" port="27017"/>
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+  		<constructor-arg ref="mongoClient"/>
+  		<constructor-arg name="databaseName" value="grocery"/>
+	</bean>
+	
+	<mongo:repositories base-package="pl.edu.agh.fiis.grocery.core.repository" mongo-template-ref="mongoTemplate"/>
+	
+</beans>
