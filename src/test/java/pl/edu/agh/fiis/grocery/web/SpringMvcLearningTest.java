@@ -1,4 +1,4 @@
-package pl.edu.agh.fiis.grocery;
+package pl.edu.agh.fiis.grocery.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

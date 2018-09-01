@@ -8,7 +8,9 @@ dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:4.0.0'
 	compile 'javax.servlet:jstl:1.2'
 	compile 'org.springframework:spring-webmvc:5.0.8.RELEASE'
+	compile 'org.springframework.data:spring-data-mongodb:2.0.9.RELEASE'
 	
-	testCompile 'junit:utni:4.12'
+	testCompile 'junit:junit:4.12'
 	testCompile 'org.springframework:spring-test:5.0.8.RELEASE'
+	testCompile 'org.hamcrest:hamcrest-all:1.3'
 }
