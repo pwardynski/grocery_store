@@ -1,4 +1,4 @@
-package pl.edu.agh.fiis.grocery;
+package pl.edu.agh.fiis.grocery.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
