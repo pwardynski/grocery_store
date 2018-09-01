@@ -24,12 +24,10 @@ public class ProductControllerTest {
 	
 	@Test
 	public void getAllProducts() {
-		ProductController productController = new ProductController() {
-			@Override
-			public ProductService getProductService() {
-				return productServiceMock;
-			}
-		};
+
+		
+		ProductController productController = new ProductController();
+		productController.setProductService(productServiceMock);
 		List<Product> expectedProducts = Arrays.asList(new Product(), new Product());
 		when(productServiceMock.getAllProducts()).thenReturn(expectedProducts);
 		
@@ -37,5 +35,7 @@ public class ProductControllerTest {
 		
 		verify(productServiceMock).getAllProducts();
 		assertThat(actualProducts, is(expectedProducts));
+		
+		
 	}
 }
