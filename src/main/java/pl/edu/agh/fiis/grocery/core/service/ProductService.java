@@ -23,4 +23,9 @@ public class ProductService {
 		this.productRepository = productRepository;
 	}
 
+	public Product getProductByCode(int code) {
+		Product product = productRepository.findByCode(code);
+		return product;
+	}
+
 }
