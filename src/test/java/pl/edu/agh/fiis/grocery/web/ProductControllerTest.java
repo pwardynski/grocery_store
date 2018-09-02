@@ -59,4 +59,13 @@ public class ProductControllerTest {
 		
 		
 	}
+	
+	@Test
+	public void deleteProductByCode() {
+
+		productController.deleteProductByCode(1);
+		
+		verify(productServiceMock).deleteProductByCode(1);
+			
+	}
 }
