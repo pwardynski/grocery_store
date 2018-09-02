@@ -28,4 +28,9 @@ public class ProductController {
 		this.productService = productService;
 	}
 
+	public Product getProductByCode(int code) {
+		Product product = productService.getProductByCode(code);
+		return product;
+	}
+
 }
