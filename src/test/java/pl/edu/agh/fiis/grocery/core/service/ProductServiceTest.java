@@ -51,4 +51,12 @@ public class ProductServiceTest {
 		verify(productRepositoryMock).findByCode(1);
 		assertThat(actualProduct, is(expectedProduct));
 	}
+	
+	@Test
+	public void deleteProductByCode() {
+		
+		productService.deleteProductByCode(10);
+		
+		verify(productRepositoryMock).deleteByCode(10);
+	}
 }

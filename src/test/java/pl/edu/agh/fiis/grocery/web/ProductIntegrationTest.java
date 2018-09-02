@@ -1,7 +1,8 @@
 package pl.edu.agh.fiis.grocery.web;
 
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -16,11 +17,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import pl.edu.agh.fiis.grocery.core.data.Product;
+import pl.edu.agh.fiis.grocery.core.repository.ProductRepository;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring-mvc-config.xml",
 		"file:src/main/webapp/WEB-INF/spring-core-config.xml"})
 public class ProductIntegrationTest {
+	
+	private static final int CODE_OF_DELETED_PRODUCT = 10;
+	
+	@Autowired
+	ProductRepository productRepository;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -44,5 +53,18 @@ public class ProductIntegrationTest {
 		mockMvc.perform(get("/products/2"))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.name", is("potato")));
+	}
+	
+	@Test
+	public void deleteProductByCode() throws Exception {
+		Product product = productRepository.findByCode(CODE_OF_DELETED_PRODUCT);
+		
+		mockMvc.perform(delete("/products/"+CODE_OF_DELETED_PRODUCT))
+		.andExpect(status().isOk());
+		
+		Product productAfterDeletion = productRepository.findByCode(CODE_OF_DELETED_PRODUCT);
+		assertThat(productAfterDeletion, nullValue());
+		
+		productRepository.insert(product);
 	}
 }
