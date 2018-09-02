@@ -28,4 +28,8 @@ public class ProductService {
 		return product;
 	}
 
+	public void deleteProductByCode(int code) {
+		productRepository.deleteByCode(code);
+	}
+
 }
