@@ -2,6 +2,7 @@ package pl.edu.agh.fiis.grocery.core.repository;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.*;
 
@@ -28,5 +29,15 @@ public class ProductRepositoryLearningTest {
 		List<Product> products = productRepository.findAll();
 		
 		assertThat(products, is(not(empty())));
+	}
+	
+	@Test
+	public void findProductByCode() {
+		
+		Product product = productRepository.findByCode(1);
+		
+		assertThat(product, notNullValue());
+		assertThat(product.getName(), is("onion"));
+		
 	}
 }

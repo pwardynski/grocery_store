@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,13 @@ public class ProductController {
 		List<Product> products = productService.getAllProducts();
 		return products;
 	}
+
+	@RequestMapping(path="/products/{code}", method=RequestMethod.GET)
+	public Product getProductByCode(@PathVariable("code") int code) {
+		Product product = productService.getProductByCode(code);
+		return product;
+	}
+	
 	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;

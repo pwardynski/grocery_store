@@ -38,4 +38,11 @@ public class ProductIntegrationTest {
 		.andExpect(jsonPath("$[0].name", is("onion")))
 		.andExpect(jsonPath("$[1].name", is("potato")));
 	}
+	
+	@Test
+	public void getProductByCode() throws Exception {
+		mockMvc.perform(get("/products/2"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.name", is("potato")));
+	}
 }
