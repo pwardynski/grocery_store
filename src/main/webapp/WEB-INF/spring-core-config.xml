@@ -21,4 +21,5 @@
 	
 	<mongo:repositories base-package="pl.edu.agh.fiis.grocery.core.repository" mongo-template-ref="mongoTemplate"/>
 	
+	
 </beans>
