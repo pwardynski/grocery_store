@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,12 +46,16 @@ public class ProductController {
 		
 	}
 	
+	@RequestMapping(path="/products", method=RequestMethod.POST)
+	public void addProduct(@RequestBody Product newProduct) {
+		
+		productService.addProduct(newProduct);
+		
+	}
+	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
 
-
-
-	
 
 }

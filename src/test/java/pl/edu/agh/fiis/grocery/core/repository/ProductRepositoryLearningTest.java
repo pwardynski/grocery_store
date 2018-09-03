@@ -22,6 +22,7 @@ import pl.edu.agh.fiis.grocery.core.data.Product;
 public class ProductRepositoryLearningTest {
 	
 	private static final int CODE_OF_DELETED_PRODUCT = 10;
+	private static final int CODE_OF_ADDED_PRODUCT = 11;
 	
 	@Autowired
 	ProductRepository productRepository;
@@ -63,6 +64,32 @@ public class ProductRepositoryLearningTest {
 		assertThat(productAfterDeletion, nullValue());
 		
 		productRepository.insert(product);
+		
+	}
+	
+	@Test
+	public void addProduct() {
+	
+		Product newProduct = new Product();
+		newProduct.setCode(CODE_OF_ADDED_PRODUCT); 
+		newProduct.setName("radish"); 
+		newProduct.setCategory("vegetable"); 
+		newProduct.setDescription("white carrot");
+		
+		List<Product> products = productRepository.findAll();
+		int amountOfProducts = products.size();
+		
+		productRepository.insert(newProduct);
+		
+		List<Product> productsAfterAddition = productRepository.findAll();
+		int amountOfProductsAfterAddition = productsAfterAddition.size();
+		
+		Product newlyAddedProduct  = productRepository.findByCode(CODE_OF_ADDED_PRODUCT);
+		
+		assertThat(amountOfProductsAfterAddition, is(amountOfProducts + 1));
+		assertThat(newlyAddedProduct.getName(),is("radish"));
+		
+		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
 		
 	}
 }

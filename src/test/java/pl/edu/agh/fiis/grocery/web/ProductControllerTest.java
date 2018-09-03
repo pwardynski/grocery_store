@@ -68,4 +68,19 @@ public class ProductControllerTest {
 		verify(productServiceMock).deleteProductByCode(1);
 			
 	}
+	
+	@Test
+	public void addProduct() {
+
+		Product newProduct = new Product();
+		newProduct.setCode(11); 
+		newProduct.setName("radish"); 
+		newProduct.setCategory("vegetable"); 
+		newProduct.setDescription("white carrot");
+		
+		productController.addProduct(newProduct);
+		
+		verify(productServiceMock).addProduct(newProduct);
+			
+	}
 }
