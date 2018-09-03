@@ -73,7 +73,10 @@ public class ProductControllerTest {
 	public void addProduct() {
 
 		Product newProduct = new Product();
-		newProduct.setCode(11); newProduct.setName("radish"); newProduct.setCategory("vegetable"); newProduct.setDescription("white carrot");
+		newProduct.setCode(11); 
+		newProduct.setName("radish"); 
+		newProduct.setCategory("vegetable"); 
+		newProduct.setDescription("white carrot");
 		
 		productController.addProduct(newProduct);
 		

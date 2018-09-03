@@ -68,20 +68,26 @@ public class ProductRepositoryLearningTest {
 	}
 	
 	@Test
-	public void addProductByCode() {
+	public void addProduct() {
 	
-		Product product = new Product();
-		product.setCode(CODE_OF_ADDED_PRODUCT); product.setName("radish"); product.setCategory("vegetable"); product.setDescription("white carrot");
+		Product newProduct = new Product();
+		newProduct.setCode(CODE_OF_ADDED_PRODUCT); 
+		newProduct.setName("radish"); 
+		newProduct.setCategory("vegetable"); 
+		newProduct.setDescription("white carrot");
 		
 		List<Product> products = productRepository.findAll();
 		int amountOfProducts = products.size();
 		
-		productRepository.insert(product);
+		productRepository.insert(newProduct);
 		
 		List<Product> productsAfterAddition = productRepository.findAll();
 		int amountOfProductsAfterAddition = productsAfterAddition.size();
 		
+		Product newlyAddedProduct  = productRepository.findByCode(CODE_OF_ADDED_PRODUCT);
+		
 		assertThat(amountOfProductsAfterAddition, is(amountOfProducts + 1));
+		assertThat(newlyAddedProduct.getName(),is("radish"));
 		
 		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
 		

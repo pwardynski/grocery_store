@@ -10,12 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pl.edu.agh.fiis.grocery.core.data.Product;
 import pl.edu.agh.fiis.grocery.core.repository.ProductRepository;
@@ -71,14 +74,25 @@ public class ProductIntegrationTest {
 	@Test
 	public void addProduct() throws Exception {
 		
+		ObjectMapper mapper = new ObjectMapper();
+		
 		Product product = new Product();
-		product.setCode(CODE_OF_ADDED_PRODUCT); product.setName("radish"); product.setCategory("vegetable"); product.setDescription("white carrot");
+		product.setCode(CODE_OF_ADDED_PRODUCT); 
+		product.setName("radish"); 
+		product.setCategory("vegetable"); 
+		product.setDescription("white carrot");
 		
-		mockMvc.perform(post("/products/"))
-		.andExpect(status().isOk());
+		String productJson = mapper.writeValueAsString(product);
 		
-		//Product productAfterDeletion = productRepository.findByCode(CODE_OF_DELETED_PRODUCT);
-		//assertThat(productAfterDeletion, nullValue());
+		mockMvc.perform(
+				post("/products/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(productJson)
+				)
+				.andExpect(status().isOk());
+		
+		Product newlyAddedProduct = productRepository.findByCode(CODE_OF_ADDED_PRODUCT);
+		assertThat(newlyAddedProduct, notNullValue());
 		
 		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
 	}
