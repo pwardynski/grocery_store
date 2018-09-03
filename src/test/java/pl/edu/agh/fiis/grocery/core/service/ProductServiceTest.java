@@ -59,4 +59,15 @@ public class ProductServiceTest {
 		
 		verify(productRepositoryMock).deleteByCode(10);
 	}
+	
+	@Test
+	public void addProduct() {
+		
+		Product newProduct = new Product();
+		newProduct.setCode(11); newProduct.setName("radish"); newProduct.setCategory("vegetable"); newProduct.setDescription("white carrot");
+		
+		productService.addProduct(newProduct);
+		
+		verify(productRepositoryMock).insert(newProduct);
+	}
 }

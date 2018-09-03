@@ -32,4 +32,9 @@ public class ProductService {
 		productRepository.deleteByCode(code);
 	}
 
+	public void addProduct(Product newProduct) {
+		productRepository.insert(newProduct);
+		
+	}
+
 }
