@@ -27,7 +27,7 @@ import pl.edu.agh.fiis.grocery.core.repository.ProductRepository;
 public class ProductIntegrationTest {
 	
 	private static final int CODE_OF_DELETED_PRODUCT = 10;
-	
+	private static final int CODE_OF_ADDED_PRODUCT = 11;
 	@Autowired
 	ProductRepository productRepository;
 
@@ -66,5 +66,20 @@ public class ProductIntegrationTest {
 		assertThat(productAfterDeletion, nullValue());
 		
 		productRepository.insert(product);
+	}
+	
+	@Test
+	public void addProduct() throws Exception {
+		
+		Product product = new Product();
+		product.setCode(CODE_OF_ADDED_PRODUCT); product.setName("radish"); product.setCategory("vegetable"); product.setDescription("white carrot");
+		
+		mockMvc.perform(post("/products/"))
+		.andExpect(status().isOk());
+		
+		//Product productAfterDeletion = productRepository.findByCode(CODE_OF_DELETED_PRODUCT);
+		//assertThat(productAfterDeletion, nullValue());
+		
+		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
 	}
 }
