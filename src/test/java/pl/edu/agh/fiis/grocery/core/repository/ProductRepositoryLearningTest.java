@@ -23,6 +23,7 @@ public class ProductRepositoryLearningTest {
 	
 	private static final int CODE_OF_DELETED_PRODUCT = 10;
 	private static final int CODE_OF_ADDED_PRODUCT = 11;
+	private static final int CODE_OF_EDDITED_PRODUCT = 8;
 	
 	@Autowired
 	ProductRepository productRepository;
@@ -90,6 +91,24 @@ public class ProductRepositoryLearningTest {
 		assertThat(newlyAddedProduct.getName(),is("radish"));
 		
 		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
+		
+	}
+	
+	@Test
+	public void editProduct() {
+	
+		
+		Product productToUpdate = productRepository.findByCode(CODE_OF_EDDITED_PRODUCT);
+		String originalCategory = productToUpdate.getCategory();
+		productToUpdate.setCategory("fruit");
+		
+		productRepository.save(productToUpdate);
+		
+		Product productAfterUpdate = productRepository.findByCode(CODE_OF_EDDITED_PRODUCT);
+		assertThat(productAfterUpdate.getCategory(), is("fruit"));
+		
+		productAfterUpdate.setCategory(originalCategory);
+		productRepository.save(productAfterUpdate);
 		
 	}
 }
