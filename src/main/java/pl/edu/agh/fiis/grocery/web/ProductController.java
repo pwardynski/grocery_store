@@ -45,12 +45,16 @@ public class ProductController {
 		
 	}
 	
+	@RequestMapping(path="/products", method=RequestMethod.POST)
+	public void addProduct(Product newProduct) {
+		
+		productService.addProduct(newProduct);
+		
+	}
+	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
 
-
-
-	
 
 }
