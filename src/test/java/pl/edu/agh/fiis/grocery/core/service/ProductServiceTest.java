@@ -82,12 +82,6 @@ public class ProductServiceTest {
 	@Test
 	public void editProduct() {
 		
-		/*Product productWithNewParameters = new Product();
-		productWithNewParameters.setCode(8); 
-		productWithNewParameters.setName("radish"); 
-		productWithNewParameters.setCategory("vegetable"); 
-		productWithNewParameters.setDescription("white carrot");*/
-		
 		Product productToUpdate = new Product() ;
 
 		when(productRepositoryMock.findByCode(9)).thenReturn(productToUpdate);

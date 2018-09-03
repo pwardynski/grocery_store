@@ -97,7 +97,6 @@ public class ProductRepositoryLearningTest {
 	@Test
 	public void editProduct() {
 	
-		
 		Product productToUpdate = productRepository.findByCode(CODE_OF_EDDITED_PRODUCT);
 		String originalCategory = productToUpdate.getCategory();
 		productToUpdate.setCategory("fruit");
