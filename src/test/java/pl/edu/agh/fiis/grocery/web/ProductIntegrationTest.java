@@ -31,6 +31,8 @@ public class ProductIntegrationTest {
 	
 	private static final int CODE_OF_DELETED_PRODUCT = 10;
 	private static final int CODE_OF_ADDED_PRODUCT = 11;
+	private static final int CODE_OF_UPGRADED_PRODUCT = 9;
+	
 	@Autowired
 	ProductRepository productRepository;
 
@@ -95,5 +97,33 @@ public class ProductIntegrationTest {
 		assertThat(newlyAddedProduct, notNullValue());
 		
 		productRepository.deleteByCode(CODE_OF_ADDED_PRODUCT);
+	}
+	
+	@Test
+	public void editProduct() throws Exception {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Product product = new Product();
+		product.setCode(CODE_OF_ADDED_PRODUCT); 
+		product.setName("radish"); 
+		product.setCategory("fruit"); 
+		product.setDescription("white carrot");
+		
+		String productJson = mapper.writeValueAsString(product);
+		
+		Product productBeforeUpdating = productRepository.findByCode(CODE_OF_UPGRADED_PRODUCT);
+		
+		mockMvc.perform(
+				put("/products/"+ CODE_OF_UPGRADED_PRODUCT)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(productJson)
+				)
+				.andExpect(status().isOk());
+		
+		Product newlyUpdatedProduct = productRepository.findByCode(CODE_OF_UPGRADED_PRODUCT);
+		assertThat(newlyUpdatedProduct.getCategory(), is("fruit"));
+		
+		productRepository.save(productBeforeUpdating);
 	}
 }
