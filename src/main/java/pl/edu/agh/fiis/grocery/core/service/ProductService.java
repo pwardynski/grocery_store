@@ -13,14 +13,12 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	@Autowired
+	private ProductUpdater productUpdater;
 	
 	public List<Product> getAllProducts() {
 		List<Product> products = productRepository.findAll();
 		return products;
-	}
-
-	public void setProductRepository(ProductRepository productRepository) {
-		this.productRepository = productRepository;
 	}
 
 	public Product getProductByCode(int code) {
@@ -35,6 +33,23 @@ public class ProductService {
 	public void addProduct(Product newProduct) {
 		productRepository.insert(newProduct);
 		
+	}
+
+	public void editProduct(int code, Product productWithNewParameters) {
+
+		Product product = productRepository.findByCode(code);
+		
+		productUpdater.update(product, productWithNewParameters);
+		
+		productRepository.save(product);
+	}
+	
+	public void setProductRepository(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+	
+	public void setProductUpdater(ProductUpdater productUpdater) {
+		this.productUpdater = productUpdater;
 	}
 
 }

@@ -80,7 +80,22 @@ public class ProductControllerTest {
 		
 		productController.addProduct(newProduct);
 		
-		verify(productServiceMock).addProduct(newProduct);
-			
+		verify(productServiceMock).addProduct(newProduct);		
 	}
+	
+	@Test
+	public void editProduct() {
+
+		Product newProduct = new Product();
+		newProduct.setCode(11); 
+		newProduct.setName("radish"); 
+		newProduct.setCategory("vegetable"); 
+		newProduct.setDescription("white carrot");
+		
+		productController.editProduct(9, newProduct);
+		
+		verify(productServiceMock).editProduct(9,newProduct);		
+	}
+	
+	
 }

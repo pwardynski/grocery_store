@@ -22,12 +22,17 @@ public class ProductServiceTest {
 	@Mock
 	ProductRepository productRepositoryMock;
 	
+	@Mock
+	ProductUpdater productUpdaterMock;
+	
 	ProductService productService; 
+	
 	
 	@Before
 	public void setUp() {
 		productService = new ProductService();
 		productService.setProductRepository(productRepositoryMock);
+		productService.setProductUpdater(productUpdaterMock);
 	}
 	
 	@Test
@@ -72,5 +77,20 @@ public class ProductServiceTest {
 		productService.addProduct(newProduct);
 		
 		verify(productRepositoryMock).insert(newProduct);
+	}
+	
+	@Test
+	public void editProduct() {
+		
+		Product productToUpdate = new Product() ;
+
+		when(productRepositoryMock.findByCode(9)).thenReturn(productToUpdate);
+		
+		Product productWithNewParameters = new Product();
+		
+		productService.editProduct(9, productWithNewParameters);
+		
+		verify(productUpdaterMock).update(productToUpdate, productWithNewParameters);
+		verify(productRepositoryMock).save(productToUpdate);
 	}
 }

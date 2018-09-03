@@ -53,9 +53,15 @@ public class ProductController {
 		
 	}
 	
+	@RequestMapping(path="/products/{code}", method=RequestMethod.PUT)
+	public void editProduct(@PathVariable("code") int code, @RequestBody Product productWithNewParameters) {
+		productService.editProduct(code, productWithNewParameters);
+	}
+	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
+
 
 
 }
